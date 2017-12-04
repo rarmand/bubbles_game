@@ -4,7 +4,7 @@ var BallWorld = {
 
 // Create a new Phaser game object with a single state that has 3 functions
 // option for 2D: Phaser.CANVAS
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {
     preload: preload,
     create: create,
     update: update
@@ -13,7 +13,8 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
 // Called first
 // to load assets like imgs, sounds
 function preload() {
-	game.load.image("ball", "assets/ball.png");
+	game.load.image("ball", "/assets/img/rsz_ball1.png");
+	game.load.image("bg", "/assets/background/wind2.jpg");
 }
  
 // Called after preload
@@ -27,6 +28,8 @@ function create() {
 
 	// change background colour
 	game.stage.backgroundColor = "#87CEEB";
+	//background = game.add.tileSprite(0,0,800,600, "bg");
+	
 
 	// add the ball in the middle of the area
 	this.ball = game.add.sprite(game.world.centerX, game.world.centerY, "ball");
