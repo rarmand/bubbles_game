@@ -10,13 +10,15 @@ var game = new Phaser.Game(800, 600, [Phaser.WEBGL, Phaser.CANVAS], "", {
 
 function preload() {
     game.load.image("player", "/assets/img/player.png");
- 
+    game.load.image("bullet", "/assets/img/bullet1.png");
+
     game.load.script("filter", "https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Marble.js");
 
 
-    game.load.image("mango", "/assets/fruits/mango.png");
-    game.load.image("pia", "/assets/fruits/pineapple.png");
-    game.load.image("grape", "/assets/fruits/grape.png");
+    game.load.image("mango", "/assets/fruits/mango.png", 64, 64);
+    game.load.image("pia", "/assets/fruits/pineapple.png", 64, 64);
+    game.load.image("grape", "/assets/fruits/grape.png", 64, 64);
+
 }
 
 
@@ -29,10 +31,14 @@ var background;
 
 var player;
 
+var bullets;
+var bulletTime = 0;
+var bullet;
+
 var bubble1;
 var bubble2;
 var bubble3;
-
+var bubbles;
 
 function create() {
     
@@ -56,13 +62,32 @@ function create() {
     // dodanie podłoża
     floor = new Phaser.Rectangle(0, 590, 800, 10);
 
+    /************************************************************************/
+
+    // dodawanie broni
+    bullets = game.add.group();
+    bullets.enableBody = true;
+    bullets.physicsBodyType = Phaser.Physics.ARCADE;
+
+    for (var i = 0; i < 20; i++) {
+        var b = bullets.create(0,0,"bullet");
+        b.name = "bullet" + 1;
+        b.exists = false;
+        b.visible = false;
+        b.checkWorldBounds = true;
+        b.events.onOutOfBounds.add(resetBullet, this);
+    }
+
     // dodanie postaci
     player = game.add.sprite(game.world.centerX, 540, "player");
     game.physics.enable(player, Phaser.Physics.ARCADE);
 
+
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
 
+
+    /************************************************************************/
 
 
     // bubble i ustawienie grawitacji
@@ -72,6 +97,7 @@ function create() {
 
     // wyłączenie grawitacji dla player
     player.body.allowGravity = false;
+
 
 
     // ustawienie startowej postaci bubbli
@@ -94,12 +120,21 @@ function create() {
     bubble3.body.collideWorldBounds = true;
     bubble3.body.bounce.set(1);
 
+    bubbles = game.add.group();
+    bubbles.add(bubble1);
+    bubbles.add(bubble2);
+    bubbles.add(bubble3);
+
 }
 	
 
 function update() {
 
     filter.update();
+
+
+    game.physics.arcade.overlap(bullets, bubbles, collisionHandler, null, this);
+
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
@@ -123,7 +158,7 @@ function update() {
 
     if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
     {
-        //fireBullet();
+        fireBullet();
     }
 
 
@@ -131,7 +166,7 @@ function update() {
     if (game.physics.arcade.collide(player, bubble1) || 
         game.physics.arcade.collide(player, bubble2) ||
         game.physics.arcade.collide(player, bubble3)    ) {
-            game.paused = true;
+            //game.paused = true;
     }
     
     
@@ -141,4 +176,35 @@ function update() {
 function render() {
 
     game.debug.geom(floor, "#2d2d2d");
+}
+
+
+function fireBullet () {
+
+    if (game.time.now > bulletTime)
+    {
+        bullet = bullets.getFirstExists(false);
+
+        if (bullet)
+        {
+            bullet.reset(player.x + 6, player.y - 8);
+            bullet.body.velocity.y = -450;
+            bulletTime = game.time.now + 150;
+        }
+    }
+
+}
+
+//  Called if the bullet goes out of the screen
+function resetBullet (bullet) {
+
+    bullet.kill();
+
+}
+
+//  Called if the bullet hits one of the veg sprites
+function collisionHandler (bullet, bubble) {
+
+    bullet.kill();
+    bubble.kill();
 }
