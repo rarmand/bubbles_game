@@ -8,7 +8,7 @@ var game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {
  
 
 function preload() {
-	game.load.image("ball", "/assets/img/jaw.png");
+	game.load.image("ball", "/assets/img/nerd.png");
 	game.load.image("bullet", "/assets/img/bullet2.png");
 }
 
