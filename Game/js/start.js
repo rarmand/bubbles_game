@@ -40,6 +40,9 @@ var bubble2;
 var bubble3;
 var bubbles;
 
+var lives;
+var counter = 3;
+
 function create() {
     
     // to center game canvas
@@ -81,7 +84,14 @@ function create() {
     // dodanie postaci
     player = game.add.sprite(game.world.centerX, 540, "player");
     game.physics.enable(player, Phaser.Physics.ARCADE);
-
+    
+    lives = game.add.group();
+    for (var i = 0; i < counter; i++) {
+        var l = lives.create(150 + 35*i, 43,"player").scale.setTo(0.5,0.5);
+        l.name = "life" + 1;
+        l.exists = false;
+        l.visible = true;
+    }
 
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
@@ -133,6 +143,18 @@ function update() {
     filter.update();
 
 
+    // zderzenia bubbles
+    if (game.physics.arcade.collide(player, bubbles)) {
+
+        counter -= 1;
+
+        if(counter < 0) {
+            this.game.paused = true;
+        }
+
+        this.game.state.restart();
+    }
+
     game.physics.arcade.overlap(bullets, bubbles, collisionHandler, null, this);
 
 
@@ -156,25 +178,17 @@ function update() {
     }
 
 
-    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))
-    {
+    if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
         fireBullet();
     }
 
-
-    // zderzenia bubbles
-    if (game.physics.arcade.collide(player, bubble1) || 
-        game.physics.arcade.collide(player, bubble2) ||
-        game.physics.arcade.collide(player, bubble3)    ) {
-            //game.paused = true;
-    }
-    
-    
-    
 }
 
 function render() {
-
+    game.debug.text("Bubble Struggle", 50, 25);
+    game.debug.text("Time: " + this.game.time.totalElapsedSeconds().toFixed(2), 600, 25);
+    game.debug.text("Chances: ", 50, 60);
+    game.debug.text("Bubbles: " + bubbles.total, 50, 95);
     game.debug.geom(floor, "#2d2d2d");
 }
 
@@ -197,14 +211,31 @@ function fireBullet () {
 
 //  Called if the bullet goes out of the screen
 function resetBullet (bullet) {
-
     bullet.kill();
-
 }
 
 //  Called if the bullet hits one of the veg sprites
 function collisionHandler (bullet, bubble) {
 
     bullet.kill();
-    bubble.kill();
+
+    if (bubble.width / 2 > 10) {
+        new_bubble = game.add.sprite(bubble.x, bubble.y, "grape");
+        new_bubble.scale.setTo(0.7, 0.7);
+        game.physics.enable( [ new_bubble ], Phaser.Physics.ARCADE);
+
+        new_bubble.body.velocity.setTo( bubble.body.velocity.x * 0.7, bubble.body.velocity.y * 0.7);
+        new_bubble.body.collideWorldBounds = true;
+        new_bubble.body.bounce.set(1);
+
+        //bubbles.add(new_bubble);
+
+        bubble.kill();
+        bubbles.remove(bubble);
+    }
+    else {
+
+        bubble.kill();  
+        bubbles.remove(bubble);
+    }
 }

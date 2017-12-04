@@ -1,21 +1,28 @@
-- tło filtr 							DONE
-- podłoże o jakieś grubości				DONE
-	stworzyć gradient przejściowy dla podłoża
+- tło filtr 										DONE
+- podłoże o jakieś grubości							DONE
+	stworzyć gradient przejściowy dla podłoża 		ZMIANA NA INNY KOLOR
 
 
 - stworzyć postać:
-	- obrazek							DONE
-	- prędkość							DONE
-	- ograniczniki przesuwania			DONE
-	- klawisze przesuwania				DONE
-	- klawisze strzelania				
-- stworzyć strzały od postaci po naciśnięciu spacji
+	- obrazek										DONE
+	- prędkość										DONE
+	- ograniczniki przesuwania						DONE
+	- klawisze przesuwania							DONE
+	- klawisze strzelania							DONE
+- stworzyć strzały od postaci po naciśnięciu spacji DONE
 
 - piłka 
-	- obrazek
-	- prędkość
-	- grawitacja
-	- bouncing
+	- obrazek										DONE
+	- prędkość										DONE
+	- grawitacja									DONE
+	- bouncing										DONE
+
+												_______________________________
+TERAZ TRZEBA TE PIŁKI POROZBIJAĆ		|
+________________________________________________|
+
+
+
 
 == odbijanie sie elementow jedno od drugiego
 https://phaser.io/examples/v2/arcade-physics/bounce-knock
