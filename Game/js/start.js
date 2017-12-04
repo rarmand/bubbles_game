@@ -10,32 +10,45 @@ var game = new Phaser.Game(800, 600, [Phaser.WEBGL, Phaser.CANVAS], "", {
 
 function preload() {
     game.load.image("player", "/assets/img/player.png");
+ 
     game.load.script("filter", "https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Marble.js");
 
+
+    game.load.image("mango", "/assets/fruits/mango.png");
+    game.load.image("pia", "/assets/fruits/pineapple.png");
+    game.load.image("grape", "/assets/fruits/grape.png");
 }
+
 
 // basic objects in game
 var floor;
 var cursors;
+
 var filter;
 var background;
+
 var player;
+
+var bubble1;
+var bubble2;
+var bubble3;
 
 
 function create() {
     
     // to center game canvas
-
 	game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
 	game.scale.pageAlignHorizontally = true;
 	game.scale.pageAlignVertically = true; 
+
+    // to set background as a filter
     game.stage.backgroundColor = "#D3D3D3";    
 
     background = game.add.sprite(0, 0);
     background.width = 800;
     background.height = 600;
     filter = game.add.filter("Marble", 800, 600);
-    filter.alpha = 0.2;
+    filter.alpha = 0.1;
     background.filters = [filter];
 
 
@@ -50,6 +63,36 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
 
+
+
+    // bubble i ustawienie grawitacji
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    //  set the world (global) gravity
+    game.physics.arcade.gravity.y = 150;
+
+    // wyłączenie grawitacji dla player
+    player.body.allowGravity = false;
+
+
+    // ustawienie startowej postaci bubbli
+    bubble1 = game.add.sprite(0, 500, "pia");
+    bubble2 = game.add.sprite(800, 500, "grape");
+    bubble3 = game.add.sprite(400, 500, "mango");
+
+
+    game.physics.enable( [ bubble1, bubble2, bubble3 ], Phaser.Physics.ARCADE);
+
+    bubble1.body.velocity.setTo(120,250);
+    bubble1.body.collideWorldBounds = true;
+    bubble1.body.bounce.set(1);
+
+    bubble2.body.velocity.setTo(120,250);
+    bubble2.body.collideWorldBounds = true;
+    bubble2.body.bounce.set(1);
+    
+    bubble3.body.velocity.setTo(120,250);
+    bubble3.body.collideWorldBounds = true;
+    bubble3.body.bounce.set(1);
 
 }
 	
@@ -82,9 +125,20 @@ function update() {
     {
         //fireBullet();
     }
+
+
+    // zderzenia bubbles
+    if (game.physics.arcade.collide(player, bubble1) || 
+        game.physics.arcade.collide(player, bubble2) ||
+        game.physics.arcade.collide(player, bubble3)    ) {
+            game.paused = true;
+    }
+    
+    
+    
 }
 
 function render() {
-    //game.debug.geom(floor, "#2d2d2d");
-    game.debug.geom(floor, "#9400D3");
+
+    game.debug.geom(floor, "#2d2d2d");
 }

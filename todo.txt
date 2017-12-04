@@ -1,12 +1,14 @@
-- tło zależne od lvl gry
-- podłoże o jakieś grubości
+- tło filtr 							DONE
+- podłoże o jakieś grubości				DONE
+	stworzyć gradient przejściowy dla podłoża
+
 
 - stworzyć postać:
-	- obrazek
-	- prędkość
-	- ograniczniki przesuwania
-	- klawisze przesuwania
-	- klawisze strzelania
+	- obrazek							DONE
+	- prędkość							DONE
+	- ograniczniki przesuwania			DONE
+	- klawisze przesuwania				DONE
+	- klawisze strzelania				
 - stworzyć strzały od postaci po naciśnięciu spacji
 
 - piłka 
