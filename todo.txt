@@ -1,0 +1,57 @@
+- tło zależne od lvl gry
+- podłoże o jakieś grubości
+
+- stworzyć postać:
+	- obrazek
+	- prędkość
+	- ograniczniki przesuwania
+	- klawisze przesuwania
+	- klawisze strzelania
+- stworzyć strzały od postaci po naciśnięciu spacji
+
+- piłka 
+	- obrazek
+	- prędkość
+	- grawitacja
+	- bouncing
+
+== odbijanie sie elementow jedno od drugiego
+https://phaser.io/examples/v2/arcade-physics/bounce-knock
+
+== skalowanie ciał
+https://phaser.io/examples/v2/arcade-physics/body-scale
+
+== łykanie punktów
+https://phaser.io/examples/v2/arcade-physics/custom-sprite-vs-group
+
+== przytrzymaj i opusc z bouncing
+https://phaser.io/examples/v2/arcade-physics/gravity-and-drag
+
+== strzelanie 
+https://phaser.io/examples/v2/arcade-physics/group-vs-group
+
+== odbijanie sie elementow jedno od drugiego
+https://phaser.io/examples/v2/arcade-physics/group-vs-self
+
+== masa i prędkosc - odbijanie sie ruchomych elems od prowadzonego elem
+https://phaser.io/examples/v2/arcade-physics/mass-velocity-test
+
+== spadajace i odbijajace sie kulki od elementu / podloza
+https://phaser.io/examples/v2/arcade-physics/multiball
+
+== ZDERZENIE
+https://phaser.io/examples/v2/arcade-physics/on-collide-event
+
+== chodząca / skacząca postać
+https://phaser.io/examples/v2/arcade-physics/platformer-basics
+https://phaser.io/examples/v2/arcade-physics/platformer-tight
+
+== zderzenie 2 sprite'ow
+https://phaser.io/examples/v2/arcade-physics/sprite-vs-sprite
+
+
+
+EMOTKI / postacie
+https://www.iconfinder.com/icons/343139/dropped_jaw_emoticon_jaw_drop_shock_shocked_smiley_smiley_face_surprised_icon#size=64
+
+

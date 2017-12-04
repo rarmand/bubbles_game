@@ -65,7 +65,7 @@ function create() {
 
     // SETTING BOUNCING
     // set its moving
-    image.body.velocity.setTo(200,200);
+    image.body.velocity.setTo(120,250);
 
     // making the game world bounce-able
     image.body.collideWorldBounds = true;
@@ -86,5 +86,5 @@ function render() {
     game.debug.text('world gravity', sprite1.x - 32, 64);
     game.debug.text('local gravity', sprite2.x - 32, 64);
 
-    game.debug.spriteInfo(image, 32, 32);
+    game.debug.spriteInfo(image, game.width - 350, 64);
 }
