@@ -166,12 +166,14 @@ function update() {
     if (game.physics.arcade.collide(player, bubbles)) {
 
         counter -= 1;
-
-        if(counter < 0) {
-            this.game.paused = true;
+        if(counter >= 0) {
+            this.game.state.restart();
         }
-
-        this.game.state.restart();
+        else {
+            player.immovable = true;
+            bullets.removeAll(true);
+        }
+        
     }
 
     player.body.velocity.x = 0;
@@ -206,6 +208,13 @@ function render() {
     game.debug.text("Chances: ", 50, 60);
     game.debug.text("Bubbles: " + bubbles.total, 50, 95);
     game.debug.geom(floor, "#2d2d2d");
+
+    if(bubbles.total == 0) {
+        this.game.debug.text("All the bubbles shot down!!!", this.game.world.centerX - 130, this.game.world.centerY);
+    }
+    if(counter < 0) {
+        this.game.debug.text("Mission not complited! Reload the game.", this.game.world.centerX - 190, this.game.world.centerY);
+    }
 }
 
 
@@ -235,7 +244,8 @@ function collisionHandler (bullet, bubble) {
 
     bullet.kill();
 
-    if (bubble.width / 2 > 60) {
+    if (bubble.width * 0.5 > 60) {
+
         bubble.scale.setTo(0.5, 0.5);
     }
     else {
@@ -244,3 +254,4 @@ function collisionHandler (bullet, bubble) {
         bubbles.remove(bubble);
     }
 }
+
