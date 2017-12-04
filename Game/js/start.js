@@ -1,6 +1,6 @@
 // Create a new Phaser game object with a single state that has 3 functions
 // option for 2D: Phaser.CANVAS
-var game = new Phaser.Game(800, 600, [Phaser.WEBGL, Phaser.CANVAS], "", {
+var game = new Phaser.Game(800, 600, Phaser.WEBGL, "", {
     preload: preload,
     create: create,
     update: update,
@@ -15,10 +15,16 @@ function preload() {
     game.load.script("filter", "https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Marble.js");
 
 
-    game.load.image("mango", "/assets/fruits/mango.png", 64, 64);
-    game.load.image("pia", "/assets/fruits/pineapple.png", 64, 64);
-    game.load.image("grape", "/assets/fruits/grape.png", 64, 64);
-
+    game.load.image("mango", "/assets/fruits/mango.png");
+    game.load.image("pia", "/assets/fruits/pineapple.png");
+    game.load.image("grape", "/assets/fruits/grape.png");
+    game.load.image("lemon", "/assets/fruits/lemon.png");
+    game.load.image("apple", "/assets/fruits/apple.png");
+    game.load.image("pear", "/assets/fruits/pear.png");
+    game.load.image("straw", "/assets/fruits/strawberry.png");
+    game.load.image("pmgr", "/assets/fruits/pomegrante.png");
+    game.load.image("water", "/assets/fruits/watermelon.png");
+    game.load.image("orange", "/assets/fruits/orange.png");
 }
 
 
@@ -35,9 +41,17 @@ var bullets;
 var bulletTime = 0;
 var bullet;
 
+var bubble0;
 var bubble1;
 var bubble2;
 var bubble3;
+var bubble4;
+var bubble5;
+var bubble6;
+var bubble7;
+var bubble8;
+var bubble9;
+
 var bubbles;
 
 var lives;
@@ -118,19 +132,22 @@ function create() {
 
     game.physics.enable( [ bubble1, bubble2, bubble3 ], Phaser.Physics.ARCADE);
 
-    bubble1.body.velocity.setTo(120,250);
+    bubble1.body.velocity.setTo(100,250);
     bubble1.body.collideWorldBounds = true;
     bubble1.body.bounce.set(1);
 
-    bubble2.body.velocity.setTo(120,250);
+    bubble2.body.velocity.setTo(100,250);
     bubble2.body.collideWorldBounds = true;
     bubble2.body.bounce.set(1);
     
-    bubble3.body.velocity.setTo(120,250);
+    bubble3.body.velocity.setTo(100,250);
     bubble3.body.collideWorldBounds = true;
     bubble3.body.bounce.set(1);
 
     bubbles = game.add.group();
+    bubbles.enableBody = true;
+    bubbles.physicsBodyType = Phaser.Physics.ARCADE;
+
     bubbles.add(bubble1);
     bubbles.add(bubble2);
     bubbles.add(bubble3);
@@ -144,6 +161,8 @@ function update() {
 
 
     // zderzenia bubbles
+    game.physics.arcade.overlap(bullets, bubbles, collisionHandler, null, this);
+
     if (game.physics.arcade.collide(player, bubbles)) {
 
         counter -= 1;
@@ -154,9 +173,6 @@ function update() {
 
         this.game.state.restart();
     }
-
-    game.physics.arcade.overlap(bullets, bubbles, collisionHandler, null, this);
-
 
     player.body.velocity.x = 0;
     player.body.velocity.y = 0;
@@ -219,19 +235,8 @@ function collisionHandler (bullet, bubble) {
 
     bullet.kill();
 
-    if (bubble.width / 2 > 10) {
-        new_bubble = game.add.sprite(bubble.x, bubble.y, "grape");
-        new_bubble.scale.setTo(0.7, 0.7);
-        game.physics.enable( [ new_bubble ], Phaser.Physics.ARCADE);
-
-        new_bubble.body.velocity.setTo( bubble.body.velocity.x * 0.7, bubble.body.velocity.y * 0.7);
-        new_bubble.body.collideWorldBounds = true;
-        new_bubble.body.bounce.set(1);
-
-        //bubbles.add(new_bubble);
-
-        bubble.kill();
-        bubbles.remove(bubble);
+    if (bubble.width / 2 > 60) {
+        bubble.scale.setTo(0.5, 0.5);
     }
     else {
 
