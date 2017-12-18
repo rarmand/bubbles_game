@@ -13,13 +13,15 @@ Game splitted into states (written in JS):
 - play
 - win
 - lose
-- game (includes whole states and initializes the game)
+- game (includes all the states and initializes the game)
 
 Server-side working with NodeJS. 
 Command to call the server to work in terminal:
 
 (for Ubuntu 16.04 LTE):
-	nodejs SimpleServer.js Version/
+	
+	$ cd (path to the file where is SimpleServer.js file and project)
+	$ nodejs SimpleServer.js Version/
 
 Open the website on page:
 
