@@ -1,7 +1,3 @@
-// previous actions were made automatically, without human player having to do anything
-// we want to display instructions to the player
-// the start function will be called only when the player takes the required action
-// press the "W" key
 
 var menuState = {
 
