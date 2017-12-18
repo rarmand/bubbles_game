@@ -1,0 +1,4 @@
+- zatrzymanie naliczania czasu
+- zmniejszenie rozmiaru baniek
+- dodanie INTRO / wstępne menu
+- dodanie 2 rund
