@@ -1,9 +1,9 @@
-var playState = {
+var lvl1State = {
 
 
 
 	create: function() {
-		game.stage.backgroundColor = "#D3D3D3";    
+		game.stage.backgroundColor = "#000000";    
 
 
 		background = game.add.sprite(0, 0);
@@ -66,30 +66,20 @@ var playState = {
 
 		// ustawienie startowej postaci bubbli
 		bubble1 = game.add.sprite(0, 500, "pia");
-		bubble2 = game.add.sprite(800, 500, "grape");
-		bubble3 = game.add.sprite(400, 500, "mango");
 
-		game.physics.enable( [ bubble1, bubble2, bubble3 ], Phaser.Physics.ARCADE);
+
+		game.physics.enable( [ bubble1 ], Phaser.Physics.ARCADE);
 
 		bubble1.body.velocity.setTo(100, 200);
 		bubble1.body.collideWorldBounds = true;
 		bubble1.body.bounce.set(1);
 
-		bubble2.body.velocity.setTo(100, 200);
-		bubble2.body.collideWorldBounds = true;
-		bubble2.body.bounce.set(1);
 		
-		bubble3.body.velocity.setTo(100, 200);
-		bubble3.body.collideWorldBounds = true;
-		bubble3.body.bounce.set(1);
-
 		bubbles = game.add.group();
 		bubbles.enableBody = true;
 		bubbles.physicsBodyType = Phaser.Physics.ARCADE;
 
 		bubbles.add(bubble1);
-		bubbles.add(bubble2);
-		bubbles.add(bubble3);
 	},
 
 	update: function() {
@@ -191,7 +181,7 @@ var playState = {
 	},
 
 	Win: function() {
-		game.state.start('win');
+		game.state.start('level2');
 	},
 
 	Lose: function() {

@@ -18,6 +18,10 @@ var loadState = {
 		game.load.image("mango", "/assets/owoce/mangob.png");
 		game.load.image("pia", "/assets/owoce/pineb.png");
 		game.load.image("grape", "/assets/owoce/grapeb.png");
+
+		game.load.image("mangos", "/assets/owoce/mangos.png");
+		game.load.image("pias", "/assets/owoce/pines.png");
+		game.load.image("grapes", "/assets/owoce/grapes.png");
 	},
 
 	create: function() {

@@ -17,6 +17,10 @@ var bullet = null;
 var bubble0 = null;
 var bubble1 = null;
 var bubble2 = null;
+var bubble3 = null;
+var bubble4 = null;
+var bubble5 = null;
+
 var bubbles = null;
 
 var lives = null;
@@ -29,7 +33,9 @@ var counter = 3;
 game.state.add('boot', bootState);
 game.state.add('load', loadState);
 game.state.add('menu', menuState);
-game.state.add('play', playState);
+game.state.add('level1', lvl1State);
+game.state.add('level2', lvl2State);
+game.state.add('level3', lvl3State);
 game.state.add('win' , winState);
 game.state.add('lose', loseState);
 

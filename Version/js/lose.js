@@ -30,10 +30,14 @@ var loseState = {
 		bubble0 = null;
 		bubble1 = null;
 		bubble2 = null;
+		bubble3 = null;
+		bubble4 = null;
+		bubble5 = null;
+
 		bubbles = null;
 
 		lives = null;
 		counter = 3;
-		game.state.start('play');
+		game.state.start('menu');
 	}
 };
